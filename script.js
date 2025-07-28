@@ -86,7 +86,15 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    const adjusted = window.baseTemp - (baseCityTemp - targetCityTemp);
-    compareResult.innerText = `If ${window.baseCity} is ${window.baseTemp.toFixed(2)}°C, then ${compareCity} will be approximately ${adjusted.toFixed(2)}°C.`;
+    const adjustedCelsius = window.baseTemp - (baseCityTemp - targetCityTemp);
+    const adjustedFahrenheit = (adjustedCelsius * 9 / 5) + 32;
+    const adjustedKelvin = adjustedCelsius + 273.15;
+
+    compareResult.innerHTML = `
+      <p>If ${window.baseCity} is ${window.baseTemp.toFixed(2)}°C, then ${compareCity} will be approximately:</p>
+      <p>Celsius: ${adjustedCelsius.toFixed(2)}°C</p>
+      <p>Fahrenheit: ${adjustedFahrenheit.toFixed(2)}°F</p>
+      <p>Kelvin: ${adjustedKelvin.toFixed(2)}K</p>
+    `;
   });
 });
